@@ -1,0 +1,76 @@
+<cg>
+  <!-- non-bonded interaction entry -->
+  <non-bonded>
+    <!-- name of the interaction -->
+    <name>CG-CG</name>
+    <!-- specify type of CG pair -->
+    <type1>1</type1>
+    <type2>1</type2>
+    <!-- min, max and step size distance for pot (max=cutoff) -->
+    <min>0.22</min>
+    <max>0.9</max>
+    <step>0.01</step>
+    <inverse>
+      <!-- target distribution (rdf), just give gromas rdf.xvg -->
+      <target>CG-CG.dist.tgt</target>
+      <!-- additional post processing of dU before added to potential -->
+      <post_update>smooth</post_update>
+      <!-- some options for the post update scripts -->
+      <post_update_options>
+        <smooth>
+          <iterations>2</iterations>
+        </smooth>
+      </post_update_options>
+      <!-- inverse monte carlo specific stuff -->
+      <imc>
+        <group>CG-CG</group>
+      </imc>
+      <lammps>
+        <!-- name of the table for lammps run -->
+        <table>CG_CG.pot</table>
+        <table_begin>0.10</table_begin>
+        <table_bins>0.002</table_bins>
+      </lammps>
+    </inverse>
+  </non-bonded>
+
+<inverse>  
+<!-- general options for inverse script -->
+     <!-- 300*0.00831451 gromacs units -->
+    <kBT>2.49435</kBT>
+    <!-- use lammps as simulation program -->
+    <program>lammps</program>
+    <!-- lammps specific options -->
+    <lammps>
+      <!-- Command to run lammps -->
+      <command>mpiexec -np 8 lmp </command>
+      <!-- lammps script to run !-->
+      <script>spce.in</script>
+      <!-- topology to be used by  csg_stat !-->
+      <topol>topol.xml</topol>
+      <!-- traj file created by lammps !-->
+      <!--
+      <traj>traj.dump</traj>
+      <first_frame>500</first_frame>
+      -->
+      <traj>traj.xtc</traj>
+      <!-- trash so many frames at the beginning -->
+      <equi_time>50</equi_time>
+    </lammps>
+    <initial_configuration>maindir</initial_configuration>
+    <!-- these files are copied for each new run -->
+    <filelist>spce.data spce.in topol.xml spce.dump</filelist>
+    <cleanlist>traj.xtc</cleanlist>
+    <!-- do so many iterations -->
+    <iterations_max>20</iterations_max>
+    <!-- ibm: inverse boltzmann imc: inverse monte carlo -->
+    <method>imc</method>
+    <imc>
+      <!-- solver to solve linear equation system, can be numpy/octave/matlab -->
+      <solver>numpy</solver>
+    </imc>
+    <!-- write log to this file -->
+    <log_file>inverse.log</log_file>
+    <!-- write restart step to this file -->
+  </inverse>
+</cg>
