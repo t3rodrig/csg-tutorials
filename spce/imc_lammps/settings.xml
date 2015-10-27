@@ -7,7 +7,7 @@
     <type1>1</type1>
     <type2>1</type2>
     <!-- min, max and step size distance for pot (max=cutoff) -->
-    <min>0.22</min>
+    <min>0.24</min>
     <max>0.9</max>
     <step>0.01</step>
     <inverse>
