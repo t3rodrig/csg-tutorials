@@ -1,0 +1,9 @@
+<topology base="spce.dump">
+  <molecules>
+    <clear/>
+    <define name="SOL" first="1" nbeads="1" nmols="5439"/>
+  </molecules>
+  <beadtypes>
+    <mass name="1" value="18.0154"/>
+  </beadtypes>
+</topology>

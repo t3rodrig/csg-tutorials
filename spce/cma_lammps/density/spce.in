@@ -1,0 +1,24 @@
+# coarse-grained spce water
+
+units		lj
+atom_style	atomic
+
+read_data       spce.data
+
+pair_style	table linear 1000
+pair_coeff	1 1 CG_CG.pot VOTCA 1.4
+
+min_style quickmin
+minimize 1.0e-4 1.0e-6 1000 10000
+reset_timestep 0
+velocity	all create 2.49 87287
+
+timestep	0.002
+fix		1 all nve
+fix		2 all langevin 2.49 2.49 0.2 545454
+
+#dump		1 all atom 50 traj.dump
+dump		1 all xtc 50 traj.xtc
+
+thermo		1000
+run		50000
