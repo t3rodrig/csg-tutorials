@@ -1,0 +1,13 @@
+<topology base="conf.pdb">
+  <!-- nm -->
+  <box xx="4.031" yy="4.031" zz="4.031"/>
+  <molecules>
+    <clear/>
+    <define name="SOL" first="1" nbeads="3" nmols="2180"/>
+  </molecules>
+  <beadtypes>
+    <mass name="OW" value="15.999"/>
+    <mass name="HW1" value="1.0080"/>
+    <mass name="HW2" value="1.0080"/>
+  </beadtypes>
+</topology>
